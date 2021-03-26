@@ -17,7 +17,7 @@ export default class Nab extends Component {
             <Nav>
               <Link
                 style={{ color: "mediumspringgreen" }}
-                eventKey={2}
+                eventkey={2}
                 to="/cart"
               >
                 My Cart
