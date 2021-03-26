@@ -7,6 +7,7 @@ class ProductProvider extends Component {
   state = {
     products: dataProducts,
     detailProduct: prodInDetails,
+    cart: [],
   };
 
   getItem = (id) => {
@@ -21,12 +22,26 @@ class ProductProvider extends Component {
     });
   };
 
+  addToCart = (id) => {
+    let tempProduct = [...this.state.products];
+    const index = tempProduct.indexOf(this.getItem(id));
+    const product = tempProduct[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    this.setState(() => {
+      return { products: tempProduct, cart: [...this.state.cart, product] };
+    });
+  };
+
   render() {
     return (
       <ProductContext.Provider
         value={{
           ...this.state,
           handleDetails: this.handleDetails,
+          addToCart: this.addToCart,
         }}
       >
         {this.props.children}

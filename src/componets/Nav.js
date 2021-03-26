@@ -15,26 +15,26 @@ export default class Nab extends Component {
               <Link to="/">Products</Link>
             </Nav>
             <Nav>
-              <Link
+              {/* <Link
                 style={{ color: "mediumspringgreen" }}
                 eventkey={2}
                 to="/cart"
               >
-                My Cart
-              </Link>
-              {/* <ProductConsumer>
+                My Cart()
+              </Link> */}
+              <ProductConsumer>
                 {(value) => {
                   return (
                     <Link
                       style={{ color: "mediumspringgreen" }}
-                      eventKey={2}
+                      eventkey={2}
                       to="/cart"
                     >
                       My Cart ({value.cart.length})
                     </Link>
                   );
                 }}
-              </ProductConsumer> */}
+              </ProductConsumer>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
