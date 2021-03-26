@@ -1,12 +1,16 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "./componets/Nav";
+import Productlist from "./componets/Productlist";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <h1>Hello World</h1>
+      <Route path="/" component={Nav} />
+      <Switch>
+        <Route exact path="/" component={Productlist} />
+      </Switch>
     </div>
   );
 }
