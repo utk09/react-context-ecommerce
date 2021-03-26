@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "./componets/Nav";
 import Productlist from "./componets/Productlist";
 import Details from "./componets/Details";
+import Cart from "./componets/Cart";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Productlist} />
         <Route path="/details" component={Details} />
+        <Route path="/cart" component={Cart} />
       </Switch>
     </div>
   );

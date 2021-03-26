@@ -8,6 +8,7 @@ class ProductProvider extends Component {
     products: dataProducts,
     detailProduct: prodInDetails,
     cart: [],
+    cartSubtotal: 0,
   };
 
   getItem = (id) => {
@@ -30,8 +31,47 @@ class ProductProvider extends Component {
     product.count = 1;
     const price = product.price;
     product.total = price;
+    this.setState(
+      () => {
+        return { products: tempProduct, cart: [...this.state.cart, product] };
+      },
+      () => {
+        this.makeTotal();
+      }
+    );
+  };
+
+  removeItem = (id) => {
+    let tempProduct = [...this.state.products];
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter((item) => item.id !== id);
+    const index = tempProduct.indexOf(this.getItem(id));
+
+    let removedProd = tempProduct[index];
+
+    removedProd.inCart = false;
+    removedProd.total = 0;
+    removedProd.count = 0;
+
+    this.setState(
+      () => {
+        return {
+          cart: [...tempCart],
+          product: [...tempProduct],
+        };
+      },
+      () => {
+        return this.makeTotal();
+      }
+    );
+  };
+
+  makeTotal = () => {
+    let subTotal = 0;
+    this.state.cart.map((item) => (subTotal += item.total));
+    const total = subTotal;
     this.setState(() => {
-      return { products: tempProduct, cart: [...this.state.cart, product] };
+      return { cartSubtotal: total };
     });
   };
 
@@ -42,6 +82,8 @@ class ProductProvider extends Component {
           ...this.state,
           handleDetails: this.handleDetails,
           addToCart: this.addToCart,
+          removeItem: this.removeItem,
+          makeTotal: this.makeTotal,
         }}
       >
         {this.props.children}
